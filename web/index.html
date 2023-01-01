@@ -4,7 +4,7 @@
     </head>
     <style>
         body{
-            background-color: rgb(236, 236, 236);
+            background-color: rgb(241, 241, 241);
             height: 100vh;
             padding: 0px;
             border: none;
@@ -15,32 +15,77 @@
             padding: 0px;
             border: none;
             margin: 0px;
-            overflow: auto;
+            overflow-y: none;
+            overflow-x: scroll;
             white-space: nowrap;
             scroll-snap-type: x mandatory;
-            background-color: pink;
+            background-color: rgb(241, 241, 241);
         }
         .largecards {
             display: inline-block;
             scroll-snap-align: start;
             height: 100vh;
+            vertical-align: top;
             min-width: 100vw;
             background: center/cover;
+            
+        }
+        h1.time {
+            font-size: 3.5em;
+            color: white;
+            margin-top: -150px;
+            margin-left: 15px;
+            vertical-align: bottom;
+            font: 700 3.5em"Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        h2.weather{
+            margin-top: -40px;
+            color: white;
+            margin-left: 15px;
+            font: 700 1.5em"Helvetica Neue", Helvetica, Arial, sans-serif;
+
+        }
+        .gradient{
+            width: 100%;
+            height: 100%;
+            vertical-align: bottom;
+            background: linear-gradient(0deg, rgb(0, 0, 0) 1%, rgba(255,255,255,0) 34%);
         }
     </style>
     <body>
         <div class="mainbox">
             <div id="ambient" class="largecards">
-
+                <div class="gradient"></h1></div>
+                <h1 class="time"></h1>
+                <h2 class="weather">50°</h2>
             </div>
-            <div class="largecards" style="background-color: blue;">
+            <div class="largecards">
 
             </div>
         </div>
     <script>
+        const Store = require('electron-store');
+        const schema = {
+            devmode: {
+                type: 'boolean',
+                default: false,
+            },
+            name: {
+                type: 'string',
+                default: 'Vestal'
+            },
+            time: {
+                type: 'number',
+                default: 30000
+            }
+        };
+        const settings = new Store({schema});
+
         var currentBackground = new Image();
         var nextBackground = new Image();
-        var time = 10000;
+        //To be configured
+        var time = settings.get("time");
+        var name = settings.get("name");
         function backgroundImageFetcher() {
             fetch("https://backend-sdp.vestal.tk/background.php")
             .then(response => response.text())
@@ -69,6 +114,36 @@
         function firstLoad(){
             backgroundFirst();
             setInterval(backgroundChanger, time);
+            setInterval(getCurrentTime, 100);
+        }
+        const currenttime = new Date();
+        var hours = "";
+        var minutes = "";
+        function getTime12() {
+            if (currenttime.getHours() > 12) {
+                hours = currenttime.getHours() - 12;
+            } else {
+                hours = currenttime.getHours();
+            }
+            if (currenttime.getMinutes() < 10) {
+                minutes = "0" + currenttime.getMinutes();
+            } else {
+                minutes = currenttime.getMinutes();
+            }
+        }
+        function getTime24() {
+            hours = currenttime.getHours();
+            if (currenttime.getMinutes() < 10) {
+                minutes = "0" + currenttime.getMinutes();
+            } else {
+                minutes = currenttime.getMinutes();
+            }
+        }
+
+        function getCurrentTime() {
+            getTime12();
+            const timeString = hours + ":" + minutes;
+            document.getElementsByClassName("time")[0].innerHTML = timeString;
         }
         firstLoad();
     </script>
