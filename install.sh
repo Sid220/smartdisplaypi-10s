@@ -65,6 +65,7 @@ fi
 git clone https://github.com/Sid220/smartdisplaypi-10s.git /usr/share/smartdisplaypi-10s
 if [ $? != 0 ]; then
     dialog --title "Error" --msgbox "Error cloning the repository." 10 50
+    report
     exit 1
 fi
 
