@@ -119,4 +119,6 @@ mv /usr/share/smartdisplaypi-10s/assets/xsession /home/"$username"/.xsessionrc
 
 dialog --title "Installation complete!" --msgbox "Installation complete! Your device will now reboot" 10 50
 
+apt remove dialog -y
+
 reboot
