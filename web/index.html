@@ -1,0 +1,77 @@
+<html>
+    <head>
+
+    </head>
+    <style>
+        body{
+            background-color: rgb(236, 236, 236);
+            height: 100vh;
+            padding: 0px;
+            border: none;
+            margin: 0px;
+        }
+        .mainbox{
+            height: 100vh;
+            padding: 0px;
+            border: none;
+            margin: 0px;
+            overflow: auto;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+            background-color: pink;
+        }
+        .largecards {
+            display: inline-block;
+            scroll-snap-align: start;
+            height: 100vh;
+            min-width: 100vw;
+            background: center/cover;
+        }
+    </style>
+    <body>
+        <div class="mainbox">
+            <div id="ambient" class="largecards">
+
+            </div>
+            <div class="largecards" style="background-color: blue;">
+
+            </div>
+        </div>
+    <script>
+        var currentBackground = new Image();
+        var nextBackground = new Image();
+        function backgroundImageFetcher() {
+            fetch("https://backend-sdp.vestal.tk/background.php")
+            .then(response => response.text())
+            .then(data => {
+                nextBackground.src = data;
+                console.log(nextBackground);
+            });
+        }
+        function changer() {
+            if (currentBackground != nextBackground){
+                document.getElementById("ambient").style.backgroundImage = "url(" + nextBackground.src + ")";
+                console.log("Background changed");
+                console.log(nextBackground);
+                currentBackground = nextBackground;
+            }
+        }
+        function backgroundChanger(){
+            backgroundImageFetcher();
+            
+        }
+        function backgroundFirst() {
+            fetch("https://backend-sdp.vestal.tk/background.php")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("ambient").style.backgroundImage = "url(" + data + ")";
+            });
+        }
+        function firstLoad(){
+            backgroundFirst();
+            setInterval(backgroundChanger, 5000);
+        }
+        firstLoad();
+    </script>
+    </body>
+</html>
