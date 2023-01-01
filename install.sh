@@ -91,7 +91,7 @@ if [ $? != 0 ]; then
     fi
 fi
 
-apt install nodejs -y
+apt install nodejs npm -y
 if [ $? != 0 ]; then
     dialog --title "Error" --yesno "Error installing NodeJS. Would you like to see the log? You must view the log if you wish to continue." 10 50
     if [ $? == 0 ]; then
@@ -104,7 +104,7 @@ fi
 
 RAWSLIMCONF=$(</usr/share/smartdisplaypi-10s/assets/slim_NOCURSOR.conf)
 
-echo "${RAWSLIMCONF/\[SMARTDISPLAYPI_USER_HERE_YOUR_MOM\]/"$username"}" | sudo tee /etc/slim.conf > /dev/null
+echo "${RAWSLIMCONF/\[SMARTDISPLAYPI_USER_HERE_YOUR_MOM\]/"$username"}" | tee /etc/slim.conf > /dev/null
 if [ $? != 0 ]; then
     dialog --title "Error" --yesno "Error moving slim config. Would you like to continue?" 10 50
     if [ $? != 0 ]; then
