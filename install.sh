@@ -44,7 +44,8 @@ if [ $? != 0 ]; then
     dialog --title "Error" --msgbox "You did not enter a username. Please run this script again." 10 50
     exit 1
 else
-    id $(cat /tmp/username)
+    username=$(cat /tmp/username)
+    id "$username"
     if [ $? != 0 ]; then
         dialog --title "Error" --msgbox "You did not enter a valid username. Please run this script again." 10 50
         exit 1
@@ -90,7 +91,20 @@ if [ $? != 0 ]; then
     fi
 fi
 
-mv /usr/share/smartdisplaypi-10s/assets/slim_NOCURSOR.conf /etc/slim.conf
+apt install nodejs -y
+if [ $? != 0 ]; then
+    dialog --title "Error" --yesno "Error installing NodeJS. Would you like to see the log? You must view the log if you wish to continue." 10 50
+    if [ $? == 0 ]; then
+        aptLog
+    else
+      report
+        exit 1
+    fi
+fi
+
+RAWSLIMCONF=$(</usr/share/smartdisplaypi-10s/assets/slim_NOCURSOR.conf)
+
+echo "${RAWSLIMCONF/\[SMARTDISPLAYPI_USER_HERE_YOUR_MOM\]/"$username"}" | sudo tee /etc/slim.conf > /dev/null
 if [ $? != 0 ]; then
     dialog --title "Error" --yesno "Error moving slim config. Would you like to continue?" 10 50
     if [ $? != 0 ]; then
@@ -99,5 +113,10 @@ if [ $? != 0 ]; then
     else
         clear
     fi
-    exit 1
 fi
+
+mv /usr/share/smartdisplaypi-10s/assets/xsession /home/"$username"/.xsessionrc
+
+dialog --title "Installation complete!" --msgbox "Installation complete! Your device will now reboot" 10 50
+
+reboot
