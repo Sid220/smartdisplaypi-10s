@@ -12,7 +12,12 @@ const settings = new Store({schema});
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            webviewTag: true,
+        }
     })
     let template;
     if (settings.get("devmode") === false) {
