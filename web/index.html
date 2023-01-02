@@ -1,6 +1,7 @@
 <html>
     <head>
         <script src="universal.js"></script>
+        <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
     </head>
     <style>
         body{
@@ -18,7 +19,6 @@
             margin: 0px;
             overflow-y: none;
             overflow-x: scroll;
-
             white-space: nowrap;
             scroll-snap-type: x mandatory;
             background-color: rgb(241, 241, 241);
@@ -28,6 +28,8 @@
             scroll-snap-align: start;
             height: 100vh;
             vertical-align: top;
+            white-space: nowrap;
+
             min-width: 100vw;
             background: center/cover;
             
@@ -76,7 +78,7 @@
             background-color: rgb(101, 101, 101);
             border-radius: 50%;
             display: inline-block;
-            margin-right:10px;
+            margin-right: 10px;
             margin-left: 10px;
             position: relative;
             vertical-align: top;
@@ -98,12 +100,42 @@
         }
         .large-widget{
             width: calc(50% - 30px);
+            margin-left: 15px;
+            margin-right: 15px;
+            height: calc(100vh - 150px);
+            margin-top: 20px;
+            display: inline-block;
+            border-radius: 20px;
+            box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            transition: all 0.5s;
+
         }
         .medium-widget{
-
+            width: calc(50% - 30px);
+            height: calc(50vh - 75px);
+            display: inline-block;
+            border-radius: 20px;
+            margin-left: 15px;
+            margin-right: 15px;
+            box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            transition: all 0.5s;
         }
         .small-widget{
 
+
+        }
+        .grid{
+            overflow-y: hidden;
+            overflow-x: scroll;
+            white-space: nowrap;
+            height: calc(100vh - 80px);
+            margin: 0px;
+            padding: 0px;
+        }
+        .grid:after {
+        content: '';
+        display: block;
+        clear: both;
         }
     </style>
     <body>
@@ -115,7 +147,13 @@
             </div>
             <div id="widgetspage" class="largecards">
                 <h1 class="greeting" id="greeting" style="margin-left: 20px;"></h1>
-
+               <div class="grid" data-packery='{ "itemSelector": ".grid-item", "gutter": 10 }'>
+                    <div class="grid-item large-widget">Weather</div>
+                    <div class="grid-item medium-widget">Calendar</div>
+                    <div class="grid-item medium-widget">Apps</div>
+                    <div class="grid-item large-widget">...</div>
+                    <div class="grid-item large-widget">...</div>
+                </div>
             </div>
         </div>
         <div class="webview-container" id="webview-container">
