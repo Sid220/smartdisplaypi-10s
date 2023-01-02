@@ -52,6 +52,12 @@
             vertical-align: bottom;
             background: linear-gradient(0deg, rgb(0, 0, 0) 1%, rgba(255,255,255,0) 34%);
         }
+        .webview-back {
+            height: 30px;
+        }
+        .webview-webview {
+            height: calc(100vh - 30px);
+        }
     </style>
     <body>
         <div class="mainbox">
@@ -63,6 +69,10 @@
             <div id="widgetspage" class="largecards">
                 <h1 id="greeting"></h1>
             </div>
+        </div>
+        <div style="display: none;" class="webview-container">
+            <div class="webview-back">Back</div>
+            <webview class="webview-webview" src="https://www.google.com"></webview>
         </div>
     <script>
         const Store = require('electron-store');
