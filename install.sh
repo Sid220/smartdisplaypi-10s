@@ -116,6 +116,27 @@ if [ $? != 0 ]; then
 fi
 
 mv /usr/share/smartdisplaypi-10s/assets/xsession /home/"$username"/.xsessionrc
+if [ $? != 0 ]; then
+    dialog --title "Error" --yesno "Error moving xsession config. Would you like to continue?" 10 50
+    if [ $? != 0 ]; then
+        report
+        exit 1
+    else
+        clear
+    fi
+fi
+
+cd /usr/share/smartdisplaypi-10s || (report && exit 1)
+npm install
+if [ $? != 0 ]; then
+    dialog --title "Error" --yesno "Error installing npm packages. Would you like to continue?" 10 50
+    if [ $? != 0 ]; then
+        report
+        exit 1
+    else
+        clear
+    fi
+fi
 
 dialog --title "Installation complete!" --msgbox "Installation complete! Your device will now reboot" 10 50
 
