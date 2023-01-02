@@ -18,6 +18,7 @@
             margin: 0px;
             overflow-y: none;
             overflow-x: scroll;
+    
             white-space: nowrap;
             scroll-snap-type: x mandatory;
             background-color: rgb(241, 241, 241);
@@ -52,11 +53,50 @@
             vertical-align: bottom;
             background: linear-gradient(0deg, rgb(0, 0, 0) 1%, rgba(255,255,255,0) 34%);
         }
-        .webview-back {
-            height: 30px;
+        .webview-bar {
+            height: 45px;
+            padding: 7.5px;
+            background-color: rgb(51, 51, 51);
         }
         .webview-webview {
-            height: calc(100vh - 30px);
+            height: calc(100vh - 60px);
+        }
+        .webviewbutton {
+            width: 40px;
+            height: 40px;
+            padding: 2.5px;
+            background-color: rgb(101, 101, 101);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right:10px;
+            margin-left: 10px;
+            position: relative;
+            vertical-align: top;
+        }
+        .vertical-seperator {
+            width: 8px;
+            height: 45px;
+            vertical-align: top;
+            background-color: rgb(101, 101, 101);
+            display: inline-block;
+            margin-right: 10px;
+            margin-left: 10px;
+            border-radius: 10px;
+            position: relative;
+        }
+        h1.greeting{
+            font-size: 40px;
+            line-height: 50px;
+        }
+        .large-widget{
+            width: calc(50% - 30px);
+            height: 
+        }
+        .medium-widget{
+
+        }
+        .small-widget{
+
         }
     </style>
     <body>
@@ -67,11 +107,17 @@
                 <h2 class="weather">50°</h2>
             </div>
             <div id="widgetspage" class="largecards">
-                <h1 id="greeting"></h1>
+                <h1 class="greeting" id="greeting" style="margin-left: 20px;"></h1>
+                
             </div>
         </div>
-        <div style="display: none;" class="webview-container">
-            <div class="webview-back">Back</div>
+        <div style="display: block;" class="webview-container">
+            <div class="webview-bar">
+                <div class="webviewbutton">Back</div>
+                <div class="webviewbutton">Refresh</div>
+                <div class="vertical-seperator">  </div>
+
+           </div>
             <webview class="webview-webview" src="https://www.google.com"></webview>
         </div>
     <script>
