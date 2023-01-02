@@ -9,6 +9,7 @@
             padding: 0px;
             border: none;
             margin: 0px;
+            font-family: Arial, sans-serif;
         }
         .mainbox{
             height: 100vh;
@@ -59,8 +60,8 @@
                 <h1 class="time"></h1>
                 <h2 class="weather">50°</h2>
             </div>
-            <div class="largecards">
-
+            <div id="widgetspage" class="largecards">
+                <h1 id="greeting"></h1>
             </div>
         </div>
     <script>
@@ -94,7 +95,7 @@
         //To be configured
         var time = settings.get("time");
         var name = settings.get("name");
-        var greeting ="";
+        var greeting = "";
         function backgroundImageFetcher() {
             fetch("https://backend-sdp.vestal.tk/background.php")
             .then(response => response.text())
@@ -153,7 +154,14 @@
             getTime12();
             const timeString = hours + ":" + minutes;
             document.getElementsByClassName("time")[0].innerHTML = timeString;
-            
+            if (currenttime.getHours() < 12) {
+                greeting = "Good Morning, " + name;
+            } else if (currenttime.getHours() < 18) {
+                greeting = "Good Afternoon, " + name;
+            } else {
+                greeting = "Good Evening, " + name;
+            }
+            document.getElementById("greeting").innerHTML = greeting;
         }
         firstLoad();
     </script>
