@@ -77,6 +77,14 @@
             time: {
                 type: 'number',
                 default: 30000
+            },
+            weather: {
+                type: 'boolean',
+                default: false
+            },
+            weatherkey: {
+                type: 'string',
+                default: 'null'
             }
         };
         const settings = new Store({schema});
@@ -86,6 +94,7 @@
         //To be configured
         var time = settings.get("time");
         var name = settings.get("name");
+        var greeting ="";
         function backgroundImageFetcher() {
             fetch("https://backend-sdp.vestal.tk/background.php")
             .then(response => response.text())
@@ -144,6 +153,7 @@
             getTime12();
             const timeString = hours + ":" + minutes;
             document.getElementsByClassName("time")[0].innerHTML = timeString;
+            
         }
         firstLoad();
     </script>
