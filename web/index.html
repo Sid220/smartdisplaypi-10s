@@ -67,6 +67,7 @@
             position: absolute;
             top: 0;
             display: none;
+            background: white;
         }
         .webviewbutton {
             width: 40px;
@@ -97,7 +98,6 @@
         }
         .large-widget{
             width: calc(50% - 30px);
-            height:
         }
         .medium-widget{
 
@@ -120,8 +120,8 @@
         </div>
         <div class="webview-container" id="webview-container">
             <div class="webview-bar">
-                <div class="webviewbutton">Back</div>
-                <div class="webviewbutton">Refresh</div>
+                <div class="webviewbutton" onclick="exitApp()">Back</div>
+                <div class="webviewbutton" onclick="refreshApp()">Refresh</div>
                 <div class="vertical-seperator">  </div>
 
            </div>
