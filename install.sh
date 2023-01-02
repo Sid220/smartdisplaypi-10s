@@ -80,9 +80,9 @@ if [ $? != 0 ]; then
       exit 1
     fi
 fi
-apt install slim -y
+apt install slim libnss3-dev libatk1.0-0 libatk-bridge2.0-0 libcups2 libdbus-1-dev libgtk-3-dev libnotify-dev libasound2-dev libcap-dev libcups2-dev libxtst-dev libxss1 libnss3-dev -y
 if [ $? != 0 ]; then
-    dialog --title "Error" --yesno "Error installing slim DM. Would you like to see the log? You must view the log if you wish to continue." 10 50
+    dialog --title "Error" --yesno "Error installing slimDM or required C libraries. Would you like to see the log? You must view the log if you wish to continue." 10 50
     if [ $? == 0 ]; then
         aptLog
     else
