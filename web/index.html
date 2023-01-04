@@ -164,34 +164,9 @@
                 <div class="vertical-seperator">  </div>
 
            </div>
-            <webview class="webview-webview" id="mainwebview" src="https://www.google.com"></webview>
+            <webview class="webview-webview" nodeintegration="" webpreferences="contextIsolation=false" id="mainwebview" src="https://www.google.com"></webview>
         </div>
     <script>
-        const Store = require('electron-store');
-        const schema = {
-            devmode: {
-                type: 'boolean',
-                default: false,
-            },
-            name: {
-                type: 'string',
-                default: 'Vestal'
-            },
-            time: {
-                type: 'number',
-                default: 30000
-            },
-            weather: {
-                type: 'boolean',
-                default: false
-            },
-            weatherkey: {
-                type: 'string',
-                default: 'null'
-            }
-        };
-        const settings = new Store({schema});
-
         var currentBackground = new Image();
         var nextBackground = new Image();
         //To be configured

@@ -1,6 +1,150 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script src="universal.js"></script>
+    <style>
+        .setting-container {
+            height: 150px;
+            width: 150px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .settings {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .menu {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+        }
+    </style>
+</head>
 <body>
-Settings
+<div class="settings">
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/vm-settings-x4.png">
+        <p>General</p>
+    </div>
+    <div onclick="settingMenu('setup')" class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/site-x4.png">
+        <p>Setup</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/sf-x4.png">
+        <p>File Explorer</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/system-type-x4.png">
+        <p>settings</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/vm-settings-x4.png">
+        <p>Settings</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/site-x4.png">
+        <p>Browser</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/sf-x4.png">
+        <p>File Explorer</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/system-type-x4.png">
+        <p>settings</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/vm-settings-x4.png">
+        <p>Settings</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/site-x4.png">
+        <p>Browser</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/sf-x4.png">
+        <p>File Explorer</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/system-type-x4.png">
+        <p>settings</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/vm-settings-x4.png">
+        <p>Settings</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/site-x4.png">
+        <p>Browser</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/sf-x4.png">
+        <p>File Explorer</p>
+    </div>
+    <div class="setting-container">
+        <img src="https://cdn.jsdelivr.net/gh/Sid220/cdn@main/vi/system-type-x4.png">
+        <p>settings</p>
+    </div>
+</div>
+<script>
+    let menu = false;
+    function closeMenu() {
+        if(menu) {
+            menu.remove();
+            menu = false;
+        }
+        else {
+            throw new Error("Menu not initiated");
+        }
+    }
+
+    function selectAndAddListeners() {
+        if(menu) {
+            [...menu.getElementsByClassName("input-text-autoupdate")].forEach((input) => {
+                if(typeof input.dataset.storeUpdate !== 'undefined') {
+                    input.oninput = () => {
+                        settings.set(input.dataset.storeUpdate, (input.value === "" ? 'null' : input.value));
+                    }
+                    input.value = (settings.get(input.dataset.storeUpdate) === 'null' ? "" : settings.get(input.dataset.storeUpdate));
+                }
+                else {
+                    console.warn("Invalid storeUpdate value on " + input);
+                }
+            });
+        }
+        else {
+            throw new Error("Menu not initiated");
+        }
+    }
+
+    function settingMenu(name) {
+        menu = document.createElement("div");
+        let menuClose = document.createElement("button");
+        menuClose.onclick = closeMenu;
+        let menuTitle = document.createElement("h1");
+        let menuContent = document.createElement("div");
+        menu.classList.add("menu");
+        menu.appendChild(menuClose);
+        menu.appendChild(menuTitle);
+        menu.appendChild(menuContent);
+        if(name === "setup") {
+            menuContent.innerHTML = `OpenWeatherMap API Key: <input class="input-text-autoupdate" data-store-update="weatherkey" type="text"/>`
+        }
+        else if(name === "general") {
+
+        }
+        else {
+            throw new Error("Setting menu name not found");
+        }
+        selectAndAddListeners();
+        menuTitle.innerText = name;
+        document.body.appendChild(menu);
+    }
+</script>
 </body>
 </html>

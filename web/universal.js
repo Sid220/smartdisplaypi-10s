@@ -1,6 +1,31 @@
 const constants = {
     root: require('electron-root-path').rootPath
 }
+const Store = require('electron-store');
+const schema = {
+    devmode: {
+        type: 'boolean',
+        default: false,
+    },
+    name: {
+        type: 'string',
+        default: 'Vestal'
+    },
+    time: {
+        type: 'number',
+        default: 30000
+    },
+    weather: {
+        type: 'boolean',
+        default: false
+    },
+    weatherkey: {
+        type: 'string',
+        default: 'null'
+    }
+};
+const settings = new Store({schema});
+
 function navigate(url, file=true) {
     const webview = document.getElementById('mainwebview');
     if (file) {
