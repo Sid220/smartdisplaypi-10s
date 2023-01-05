@@ -107,8 +107,20 @@
         if(menu) {
             [...menu.getElementsByClassName("input-text-autoupdate")].forEach((input) => {
                 if(typeof input.dataset.storeUpdate !== 'undefined') {
-                    input.oninput = () => {
-                        settings.set(input.dataset.storeUpdate, (input.value === "" ? 'null' : input.value));
+                    if(typeof input.dataset.storeRequired === "undefined") {
+                        input.oninput = () => {
+                            settings.set(input.dataset.storeUpdate, (input.value === "" ? 'null' : input.value));
+                        }
+                    }
+                    else {
+                        input.oninput = () => {
+                            if(input.value === "") {
+                                alert("This field is required");
+                            }
+                            else {
+                                settings.set(input.dataset.storeUpdate, input.value);
+                            }
+                        }
                     }
                     input.value = (settings.get(input.dataset.storeUpdate) === 'null' ? "" : settings.get(input.dataset.storeUpdate));
                 }
