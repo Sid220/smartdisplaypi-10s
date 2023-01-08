@@ -148,7 +148,7 @@
             menuContent.innerHTML = `OpenWeatherMap API Key: <input class="input-text-autoupdate" data-store-update="weatherkey" type="text"/>`
         }
         else if(name === "general") {
-
+            menuContent.innerHTML = `Name: <input class="input-text-autoupdate" data-store-update="name" data-store-required=""/>`;
         }
         else {
             throw new Error("Setting menu name not found");
